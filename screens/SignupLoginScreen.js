@@ -40,21 +40,12 @@ export default class SignupLoginScreen extends React.Components {
       });
   };
   userSignUp = async (email, password, confirmPass) => {
-    if(password !== confirmPass){
-  Alert.alert("Two Password fields don't match")
-    } else { 
+   
       firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        db.collection("users").add({
-          first_name: this.state.firstName,
-          last_name: this.state.lasttName,
-          mobile_no: this.state.contact,
-          address: this.state.address,
-          email_id: this.state.emailId,
-
-        })
+      .then((response) => {
+      
         return Alert.alert("User Succefully added");
       })
       .catch(function (error) {
@@ -63,13 +54,13 @@ export default class SignupLoginScreen extends React.Components {
         return Alert.alert(errormsg);
       });
     }
-  };
+  
   render() {
     return (
       <View style={styles.Container}>
       <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
       <Text
-        style={styles.modalTitle}
+        style={styles.Title}
         >Registration</Text>
     
       <TextInput
@@ -92,24 +83,24 @@ export default class SignupLoginScreen extends React.Components {
         }}
       />
     
-      <View style={styles.modalBackButton}>
+      <View style={styles.Button}>
         <TouchableOpacity
           style={styles.registerButton}
           onPress={()=>
-            this.userSignUp(this.state.emailId, this.state.password, this.state.confirmPass)
+            this.userSignUp(this.state.emailId, this.state.password)
           }
         >
         <Text style={styles.registerButtonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.modalBackButton}>
+      <View style={styles.Button}>
         <TouchableOpacity
-          style={styles.cancelButton}
+          style={styles.registerButton}
           onPress={()=>
-            this.userSignUp(this.state.emailId, this.state.password, this.state.confirmPass)
+            this.userSignIn(this.state.emailId, this.state.password)
           }
         >
-        <Text style={{color:'#ff5722'}}>Log In</Text>
+        <Text style={styles.registerButtonText}>Log In</Text>
         </TouchableOpacity>
       </View>
       </KeyboardAvoidingView>
@@ -150,7 +141,7 @@ const styles = StyleSheet.create({
    justifyContent:'center',
    alignItems:'center'
  },
- modalTitle :{
+ Title :{
    justifyContent:'center',
    alignSelf:'center',
    fontSize:30,
@@ -200,7 +191,7 @@ const styles = StyleSheet.create({
    marginTop:5,
  },
 
- button:{
+ Button:{
    width:300,
    height:50,
    justifyContent:'center',
