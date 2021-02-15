@@ -20,7 +20,11 @@ export default class ExchangeScreen extends React.Components {
     };
   }
      
+  createUniqueId(){
+   return Math.random().toString(36).substring(5);
 
+
+  }
   
   
   showModal = ()=>{
@@ -75,14 +79,14 @@ export default class ExchangeScreen extends React.Components {
   }
 
   addItem= async(itemName, description)=>{
-
+var id = this.createUniqueId()
     var userName = this.state.userName
 
     db.collection("exchange_requests").add({
       "username"    : userName,
       "item_name"   : itemName,
       "description" : description,
-      
+      "exchangeId":  id
 
      })
 this.setState({

@@ -52,7 +52,9 @@ export default class HomeScreen extends React.Components {
         subtitle={item.description}
         titleStyle={{ color: 'black', fontWeight: 'bold' }}
         rightElement={
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress ={()=>{
+              this.props.navigation.navigate("ReceiverDetails",{"details": item})
+        }}>
               <Text style={{color:'#ffff'}}>Exchange</Text>
             </TouchableOpacity>
           }
