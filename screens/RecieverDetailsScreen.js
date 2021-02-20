@@ -52,7 +52,18 @@ updateBarterStatus=()=>{
   })
 }
 
-
+addNotification=()=>{
+  var message = this.state.userName + " has shown interest in exchanging the item"
+  db.collection("all_notifications").add({
+    "targeted_user_id"    : this.state.recieverId,
+    "donor_id"            : this.state.userId,
+    "exchange_id"          : this.state.exchange,
+    "item_name"           : this.state.itemName,
+    "date"                : firebase.firestore.FieldValue.serverTimestamp(),
+    "notification_status" : "unread",
+    "message"             : message
+  })
+}
 
 componentDidMount(){
   this.getRecieverDetails()
@@ -106,6 +117,7 @@ componentDidMount(){
                   style={styles.button}
                   onPress={()=>{
                     this.updateBarterStatus()
+                    this.addNotification()
                     this.props.navigation.navigate('MyBarters')
                   }}>
                 <Text>I want to Exchange</Text>
