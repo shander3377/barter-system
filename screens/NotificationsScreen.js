@@ -3,7 +3,6 @@ import { StyleSheet, View, FlatList,Text } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import MyHeader from '../components/MyHeader';
-
 import db from '../config';
 
 export default class NotificationScreen extends Component{
@@ -19,7 +18,8 @@ export default class NotificationScreen extends Component{
   }
 
   getNotifications=()=>{
-    this.requestRef = db.collection("all_notifications")
+    console.log(this.state.userId)
+    this.notificationRef = db.collection("all_notifications")
     .where("notification_status", "==", "unread")
     .where("targeted_user_id",'==',this.state.userId)
     .onSnapshot((snapshot)=>{
@@ -50,7 +50,7 @@ export default class NotificationScreen extends Component{
         <ListItem
           key={index}
           leftElement={<Icon name="book" type="font-awesome" color ='#696969'/>}
-          title={item.item_name}
+          title={item.book_name}
           titleStyle={{ color: 'black', fontWeight: 'bold' }}
           subtitle={item.message}
           bottomDivider

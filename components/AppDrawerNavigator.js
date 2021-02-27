@@ -3,7 +3,7 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import { AppTabNavigator } from './AppTabNavigator';
 import CustomSideBarMenu  from './customSideBarMenu';
 import MyBartersScreen from '../screens/MyBartersScreen';
-import SettingScreen from '../screens/SettingsScreen';
+import SettingScreen from '../screens/SettingScreen';
 import NotificationScreen from '../screens/NotificationsScreen';
 
 export const AppDrawerNavigator = createDrawerNavigator({

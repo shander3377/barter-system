@@ -27,39 +27,7 @@ export default class MyBartersScreen extends Component {
        });
      })
    }
-   sendItem=(itemDetails)=>{
-    if(itemDetails.request_status === "Item Sent"){
-      var requestStatus = "Donor Interested"
-      db.collection("all_Barters").doc(itemDetails.doc_id).update({
-        "request_status" : "Donor Interested"
-      })
-      this.sendNotification(itemDetails,requestStatus)
-    }
-    else{
-      var requestStatus = "Item Sent"
-      db.collection("all_Barters").doc(itemDetails.doc_id).update({
-        "request_status" : "Book Sent"
-      })
-      this.sendNotification(itemDetails,requestStatus)
-    }
-  }
-   sendNotification=(itemDetails,requestStatus)=>{
-    var requestId = itemDetails.request_id
-    var donorId = itemDetails.donor_id
-    db.collection("all_notifications")
-    .where("request_id","==", requestId)
-    .where("donor_id","==",donorId)
-    .get()
-    .then((snapshot)=>{
-      snapshot.forEach((doc) => {
-        db.collection("all_notifications").doc(doc.id).update({
-          "message": "User Has Sent the item",
-          "notification_status" : "unread",
-          "date"                : firebase.firestore.FieldValue.serverTimestamp()
-        })
-      });
-    })
-  }
+
    keyExtractor = (item, index) => index.toString()
 
    renderItem = ( {item, i} ) =>(
@@ -70,23 +38,11 @@ export default class MyBartersScreen extends Component {
        leftElement={<Icon name="book" type="font-awesome" color ='#696969'/>}
        titleStyle={{ color: 'black', fontWeight: 'bold' }}
        rightElement={
-        <TouchableOpacity
-         style={[
-           styles.button,
-           {
-             backgroundColor : item.request_status === "Book Sent" ? "green" : "#ff5722"
-           }
-         ]}
-         onPress = {()=>{
-           this.sendBook(item)
-         }}
-        >
-          <Text style={{color:'#ffff'}}>{
-            item.request_status === "Book Sent" ? "Book Sent" : "Send Book"
-          }</Text>
-        </TouchableOpacity>
-      }
-    bottomDivider
+           <TouchableOpacity style={styles.button}>
+             <Text style={{color:'#ffff'}}>Exchange</Text>
+           </TouchableOpacity>
+         }
+       bottomDivider
      />
    )
 
@@ -116,7 +72,6 @@ export default class MyBartersScreen extends Component {
                  keyExtractor={this.keyExtractor}
                  data={this.state.allBarters}
                  renderItem={this.renderItem}
-  
                />
              )
            }
