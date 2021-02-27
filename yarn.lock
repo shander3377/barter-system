@@ -5970,6 +5970,11 @@ react-native-status-bar-height@^2.2.0:
   resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.6.0.tgz#b6afd25b6e3d533c43d0fcdcfd5cafd775592cea"
   integrity sha512-z3SGLF0mHT+OlJDq7B7h/jXPjWcdBT3V14Le5L2PjntjjWM3+EJzq2BcXDwV+v67KFNJic5pgA26cCmseYek6w==
 
+react-native-swipe-list-view@^3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.6.tgz#dde8f65dcdc24f50fafc05da9e90b139b1c3b185"
+  integrity sha512-FIrLzYjdxpMmD1hinP6bLSVS2eR2bhFdFuaqOJ+6/EuWDqZMBQcL4FLbkIwulMOc39JGdGZAxGExJYs7VKiQeQ==
+
 react-native-tab-view@^2.15.2:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.2.tgz#4bc7832d33a119306614efee667509672a7ee64e"
