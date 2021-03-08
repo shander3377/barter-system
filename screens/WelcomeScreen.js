@@ -1,6 +1,8 @@
+
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity,TextInput, Alert, Modal,ScrollView,KeyboardAvoidingView } from 'react-native';
 import BarterAnimation from '../components/BarterAnimationScreen.js';
+import { RFValue } from "react-native-responsive-fontsize";
 
 import db from '../config';
 import firebase from 'firebase';
@@ -71,12 +73,12 @@ export default class WelcomeScreen extends Component {
       transparent={true}
       visible={this.state.isVisible}
       >
-      <View style={styles.modalContainer}>
+      <View style={{flex: 1,backgroundColor: "#fff"}}>
         <ScrollView style={{width:'100%'}}>
-          <KeyboardAvoidingView style={{flex:1,justifyContent:'center', alignItems:'center'}}>
-          <Text
-            style={{justifyContent:'center', alignSelf:'center', fontSize:30,color:'#ff5722',margin:50}}
-            >Registration</Text>
+        <View style={{flex:0.2,justifyContent:'center',alignItems:'center'}}>
+            <Text style={{fontSize:RFValue(20),fontWeight:"bold",color:"#32867d"}}> SIGN UP </Text>
+          </View>
+          <View style={{flex:0.95}}>
           <TextInput
             style={styles.formTextInput}
             placeholder ={"First Name"}
@@ -146,7 +148,7 @@ export default class WelcomeScreen extends Component {
               })
             }}
           />
-                <TextInput
+          <TextInput
             style={styles.formTextInput}
             placeholder ={"Country currency code"}
             maxLength ={8}
@@ -156,7 +158,8 @@ export default class WelcomeScreen extends Component {
               })
             }}
           />
-          <View style={styles.modalBackButton}>
+        </View>
+        <View style={{flex:0.2,alignItems:'center'}}>
             <TouchableOpacity
               style={styles.registerButton}
               onPress={()=>
@@ -165,16 +168,21 @@ export default class WelcomeScreen extends Component {
             >
             <Text style={styles.registerButtonText}>Register</Text>
             </TouchableOpacity>
-          </View>
-          <View style={styles.modalBackButton}>
+         
             <TouchableOpacity
               style={styles.cancelButton}
               onPress={()=>this.setState({"isVisible":false})}
             >
-            <Text style={{color:'#ff5722'}}>Cancel</Text>
+            <Text style={{  fontSize : RFValue(20),
+                fontWeight:'bold',
+                color: "#32867d",
+                marginTop:RFValue(10)
+                }}>
+                  Cancel
+                </Text>
             </TouchableOpacity>
           </View>
-          </KeyboardAvoidingView>
+          
         </ScrollView>
       </View>
     </Modal>
@@ -192,10 +200,10 @@ export default class WelcomeScreen extends Component {
         <View style={styles.profileContainer}>
           {/* <BarterAnimation/> */}
           <Text style={styles.title}>Barter</Text>
-          <Text style={{color:'#ff8a65'}}> A Trading Method </Text>
+          <Text style={{color:'#32867d'}}> A Trading Method </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <Text style={{color:'#ff5722', fontSize:18, fontWeight:'bold',marginLeft:55}}>USERNAME</Text>
+          <Text style={{color:'#32867d', fontSize:18, fontWeight:'bold',marginLeft:55}}>USERNAME</Text>
           <View style={{alignItems:'center'}}>
             <TextInput
             style={styles.loginBox}
@@ -207,7 +215,7 @@ export default class WelcomeScreen extends Component {
             }}
             />
           </View>
-          <Text style={{color:'#ff5722', fontSize:18, fontWeight:'bold',marginLeft:55}}>PASSWORD</Text>
+          <Text style={{color:'#32867d', fontSize:18, fontWeight:'bold',marginLeft:55}}>PASSWORD</Text>
           <View style={{alignItems:'center'}}>
             <TextInput
               style={styles.loginBox}
@@ -224,7 +232,7 @@ export default class WelcomeScreen extends Component {
               style={[styles.button,{marginBottom:10}]}
               onPress = {()=>{this.userLogin(this.state.username, this.state.password)}}
               >
-              <Text style={{color:'#ff5722', fontSize:18, fontWeight:'bold'}}>LOGIN</Text>
+              <Text style={{color:'#32867d', fontSize:18, fontWeight:'bold'}}>LOGIN</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
@@ -232,7 +240,7 @@ export default class WelcomeScreen extends Component {
                 this.setState({"isVisible":true})
               }}
               >
-                <Text style={{color:'#ff5722', fontSize:18, fontWeight:'bold'}}>SIGN UP</Text>
+                <Text style={{color:'#32867d', fontSize:18, fontWeight:'bold'}}>SIGN UP</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -245,7 +253,7 @@ export default class WelcomeScreen extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:'#ffe0b2'
+    backgroundColor:'#6fc0b8'
   },
   profileContainer:{
     flex:1,
@@ -256,13 +264,13 @@ const styles = StyleSheet.create({
     fontSize:60,
     fontWeight:'300',
     // fontFamily:'AvenirNext-Heavy',
-    color : '#ff9800'
+    color : '#32867d'
   },
   loginBox:{
     width: 300,
     height: 35,
     borderBottomWidth: 1.5,
-    borderColor:'#ffab91',
+    borderColor:'#32867d',
     fontSize: 20,
     marginBottom:20,
     marginTop:5
@@ -292,28 +300,38 @@ const styles = StyleSheet.create({
     marginBottom:80,
   },
   formTextInput:{
-    width:"75%",
-    height:35,
-    alignSelf:'center',
-    borderColor:'#ffab91',
-    borderRadius:10,
-    borderWidth:1,
-    marginTop:20,
-    padding:10
+      width: "90%",
+      height: RFValue(45),
+      padding: RFValue(10),
+      borderWidth:1,
+      borderRadius:2,
+      borderColor:"grey",
+      paddingBottom:RFValue(10),
+      marginLeft:RFValue(20),
+      marginBottom:RFValue(14)
   },
-  registerButton:{
-    width:200,
-    height:40,
-    alignItems:'center',
-    justifyContent:'center',
-    borderWidth:1,
-    borderRadius:10,
-    marginTop:30
+  registerButton: {
+    width: "85%",
+    height: RFValue(50),
+    marginTop:RFValue(20),
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: RFValue(3),
+    backgroundColor: "#32867d",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 16,
+    marginTop: RFValue(10),
   },
-  registerButtonText:{
-    color:'#ff5722',
-    fontSize:15,
-    fontWeight:'bold'
+  registerButtonText: {
+    fontSize: RFValue(23),
+    fontWeight: "bold",
+    color: "#fff",
   },
   cancelButton:{
     width:200,

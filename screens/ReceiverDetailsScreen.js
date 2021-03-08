@@ -3,6 +3,7 @@ import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
 import{Card,Header,Icon} from 'react-native-elements';
 import firebase from 'firebase';
 
+import { RFValue } from "react-native-responsive-fontsize";
 import db from '../config.js';
 
 export default class ReceiverDetailsScreen extends Component{
@@ -174,25 +175,25 @@ componentDidMount(){
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
   },
-  buttonContainer : {
-    flex:0.3,
-    justifyContent:'center',
-    alignItems:'center'
+  buttonContainer: {
+    flex: 0.3,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  button:{
-    width:200,
-    height:50,
-    justifyContent:'center',
-    alignItems : 'center',
-    borderRadius: 10,
-    backgroundColor: 'orange',
+  button: {
+    width: "75%",
+    height: RFValue(60),
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: RFValue(60),
+    backgroundColor: "#ff5722",
     shadowColor: "#000",
     shadowOffset: {
-       width: 0,
-       height: 8
-     },
-    elevation : 16
-  }
-})
+      width: 0,
+      height: 8,
+    },
+    elevation: 16,
+  },
+});
