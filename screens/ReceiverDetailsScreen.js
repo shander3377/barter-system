@@ -18,7 +18,10 @@ export default class ReceiverDetailsScreen extends Component{
       receiverName    : '',
       receiverContact : '',
       receiverAddress : '',
-      receiverRequestDocId : ''
+      receiverRequestDocId : '',
+      value: '',
+      currencyCode: '',
+      value: ""
     }
   }
 
@@ -28,7 +31,8 @@ export default class ReceiverDetailsScreen extends Component{
         snapshot.forEach((doc) => {
           console.log(doc.data().first_name);
           this.setState({
-            userName  :doc.data().first_name + " " + doc.data().last_name
+            userName  :doc.data().first_name + " " + doc.data().last_name,
+          currencyCode: doc.data().currency_code
           })
         })
       })
@@ -51,7 +55,7 @@ getreceiverDetails(){
   db.collection('exchange_requests').where('exchangeId','==',this.state.exchangeId).get()
   .then(snapshot=>{
     snapshot.forEach(doc => {
-      this.setState({receiverRequestDocId:doc.id})
+      this.setState({receiverRequestDocId:doc.id, value: doc.data().item_value})
    })
 })}
 
@@ -65,7 +69,18 @@ updateBarterStatus=()=>{
   })
 }
 
-
+getData(){
+  fetch("http://data.fixer.io/api/latest?access_key=1f7dd48123a05ae588283b5e13fae944&format=1")
+  .then(response=>{
+    return response.json();
+  }).then(responseData =>{
+    var currencyCode = this.state.currencyCode
+    var currency = responseData.rates.INR
+    var value =  69 / currency
+    this.setState({value: value})
+    console.log(value);
+  })
+  }
 
   addNotification=()=>{
     console.log("in the function ",this.state.rec)
@@ -85,7 +100,9 @@ updateBarterStatus=()=>{
 
 componentDidMount(){
   this.getreceiverDetails()
-  this.getUserDetails(this.state.userId)
+  this.getUserDetails(this.state.userId),
+  
+  this.getData()
 }
 
 
@@ -109,6 +126,9 @@ componentDidMount(){
             </Card>
             <Card>
               <Text style={{fontWeight:'bold'}}>Reason : {this.state.description}</Text>
+            </Card>
+            <Card>
+              <Text style={{fontWeight:'bold'}}>Value: : {this.state.value}</Text>
             </Card>
           </Card>
         </View>
